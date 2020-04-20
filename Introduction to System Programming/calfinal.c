@@ -1,6 +1,6 @@
-/* 무한 계산�?
-?�산???�선?�위??( == 0, +, - == 1, *, / == 2, ) == 3 ?��?�? ?�쪽 괄호??무조�??�고 본다.
-?�수구현???�의?�을 ?�해??(?  0?�로 ?�었?? 
+/* 氍错暅 瓿勳偘旮?
+?办偘???办劆?滌渼??( == 0, +, - == 1, *, / == 2, ) == 3 ?挫?毵? ?检 甏勴樃??氍挫“瓯??ｊ碃 氤鸽嫟.
+?垬甑槃???胳潣?膘潉 ?勴暣??(?  0?茧 ?愳棃?? 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -131,25 +131,25 @@ void pop_push(DLL *op_stack, DLL *stack) {
    }
 }
 
-void infix_to_postfix(DLL *list, DLL *stack) { //stack??postfix�?� ?�된 ?�이 ?�어간다. 리스?�는 ?�활?�했??
+void infix_to_postfix(DLL *list, DLL *stack) { //stack??postfix搿?氤 ?橂悳 ?濎澊 ?れ柎臧勲嫟. 毽姢?鸽姅 ?櫆?╉枅??
    DLL *op_stack = newDLL();
    Node *temp = list->head;
    while(temp) {
-      if(temp->op_flag == 0) { //?�자??경우 그냥 append?�다.
-         append(stack, newnode(0, 0, 0 , temp->f_start, temp->f_end, temp->b_start, temp->b_end)); //temp???�당?�는 ?�드�?append
+      if(temp->op_flag == 0) { //?瀽??瓴届毎 攴鸽儱 append?滊嫟.
+         append(stack, newnode(0, 0, 0 , temp->f_start, temp->f_end, temp->b_start, temp->b_end)); //temp???措嫻?橂姅 ?鸽摐毳?append
       } else {
-         if(op_stack->head == NULL || temp->op == -8) { // ?�산???�택??NULL?�거??temp�  ?�쪽 괄호?�때 
-            append(op_stack, newnode(1, temp->op, temp->op_prec, temp->f_start, temp->f_end, temp->b_start, temp->b_end)); // 무조�?append?�다.
+         if(op_stack->head == NULL || temp->op == -8) { // ?办偘???ろ儩??NULL?搓卑??temp臧  ?检 甏勴樃?茧晫 
+            append(op_stack, newnode(1, temp->op, temp->op_prec, temp->f_start, temp->f_end, temp->b_start, temp->b_end)); // 氍挫“瓯?append?滊嫟.
          } else {
-             if(temp->op_prec > op_stack->tail->op_prec) { //?�어�??�산???�위�  op_stack 최상?�에 ?�는 ?�산???�위보다 ?��? 경우
-                append(op_stack, newnode(1, temp->op, temp->op_prec, temp->f_start, temp->f_end, temp->b_start, temp->b_end)); // 그냥 append?�다.
-            } else { //?�산???�위�  같거???��? 경우
+             if(temp->op_prec > op_stack->tail->op_prec) { //?れ柎臧??办偘???滌渼臧  op_stack 斓滌儊?勳棎 ?堧姅 ?办偘???滌渼氤措嫟 ?掛? 瓴届毎
+                append(op_stack, newnode(1, temp->op, temp->op_prec, temp->f_start, temp->f_end, temp->b_start, temp->b_end)); // 攴鸽儱 append?滊嫟.
+            } else { //?办偘???滌渼臧  臧欔卑???戩? 瓴届毎
                while(temp->op_prec <= op_stack->tail->op_prec && op_stack->head != NULL) {
                   //printf("here?\n");
-                  pop_push(op_stack, stack); //?�을 ???�는 ?�황???�때까�? 빼내??stack??push?�다.
+                  pop_push(op_stack, stack); //?ｌ潉 ???堧姅 ?來櫓???晫旯岇? 牍茧偞??stack??push?滊嫟.
                   if(op_stack->head == NULL) break;
                }
-               append(op_stack, newnode(1, temp->op, temp->op_prec, temp->f_start, temp->f_end, temp->b_start, temp->b_end)); //??뺐으??push?�다.
+               append(op_stack, newnode(1, temp->op, temp->op_prec, temp->f_start, temp->f_end, temp->b_start, temp->b_end)); //??牒愳溂??push?滊嫟.
             }
          }
       }
@@ -235,15 +235,15 @@ void multiple(Node *first, Node *second, int minus_flag, DLL *stack){
    char *f_temp = first->b_end;
     char *s_temp = second->b_end;
     minus_flag = 0;
-    if(*first->f_start == -3 && *second->f_start != -3) { //�� * ��  
+    if(*first->f_start == -3 && *second->f_start != -3) { //靠 * 靠  
       first->f_start = first->f_start + 1;
      minus_flag = 1;
    }
-   if(*first->f_start != -3 && *second->f_start == -3) { //�� * ��  
+   if(*first->f_start != -3 && *second->f_start == -3) { //靠 * 靠  
       second->f_start = second->f_start + 1;
       minus_flag = 1;
    }
-    if(*first->f_start == -3 && *second->f_start == -3) { //�� * ��
+    if(*first->f_start == -3 && *second->f_start == -3) { //靠 * 靠
         first->f_start = first->f_start + 1;
         second->f_start = second->f_start + 1;
     }
@@ -350,7 +350,7 @@ void minus(Node *first, Node *second, int minus_flag, DLL *stack) {
     char *result_b_f_copy = NULL;
     char *result_b_s_copy = NULL;
     
-   if(*first->f_start == -3 && *second->f_start != -3) { //���� - ���
+   if(*first->f_start == -3 && *second->f_start != -3) { //澜荐 - 剧荐
        minus_minus_front = (char *)malloc(second->f_end - second->f_start + 2);
        minus_minus_front[0] = -3;
        minus_minus_temp = minus_minus_front + 1;
@@ -364,19 +364,19 @@ void minus(Node *first, Node *second, int minus_flag, DLL *stack) {
        plus(first, second, stack);
        return;
    }
-   if(*first->f_start != -3 && *second->f_start == -3) { // ��� - ����
+   if(*first->f_start != -3 && *second->f_start == -3) { // 剧荐 - 澜荐
       second->f_start = second->f_start + 1;
       plus(first, second, stack);
       return;
    }
-    if(*first->f_start == -3 && *second->f_start == -3) { // ���� - ����
+    if(*first->f_start == -3 && *second->f_start == -3) { // 澜荐 - 澜荐
         first->f_start = first->f_start + 1;
         second->f_start = second->f_start + 1;
         minus(second, first, 0, stack);
         return;
     }
     if(first->f_end - first->f_start < second->f_end - second->f_start) {
-      minus(second, first, 1, stack); //���� �� ū��, ��ȣ �־
+      minus(second, first, 1, stack); //构啊 歹 奴瘤, 何龋 持绢辑
       return;
    }
     if(first->f_end - first->f_start == second->f_end - second->f_start) {
@@ -397,7 +397,7 @@ void minus(Node *first, Node *second, int minus_flag, DLL *stack) {
     f_temp = first->f_start;
     s_temp = second->f_start;
 
-    //��� ����
+    //拌魂 矫累
     char *result_f = (char *)malloc(SIZE_FRONT);
     char *result_f_temp = result_f;
     char *result_b = NULL;
@@ -416,7 +416,7 @@ void minus(Node *first, Node *second, int minus_flag, DLL *stack) {
     result_f_temp--;
     result_f_end = result_f_temp;
     if(result_b != NULL) {
-        for(result_b_temp; result_b_temp < result_b + SIZE_BACK  ; result_b_temp++) *result_b_temp = 0; // ?�수?�도 ?�으�?초기?�s
+        for(result_b_temp; result_b_temp < result_b + SIZE_BACK  ; result_b_temp++) *result_b_temp = 0; // ?岇垬?愲弰 ?堨溂氅?齑堦赴?攕
         for(result_b_f_temp; result_b_f_temp < result_b_f + SIZE_BACK ; result_b_f_temp++) *result_b_f_temp = 0;
         result_b_f_end = result_b_f_temp;
       result_b_f_temp--;
@@ -513,17 +513,17 @@ void plus(Node *first, Node *second, DLL *stack) {
     char *result_b_end = NULL;
     char *result_f_end = NULL;
     int minus_flag = 0;
-    if(*first->f_start == -3 && *second->f_start != -3) { // ?�수 + ?�수
+    if(*first->f_start == -3 && *second->f_start != -3) { // ?岇垬 + ?戩垬
       first->f_start = first->f_start + 1;
       minus(second, first, 0, stack);
       return;
    }
-   if(*first->f_start != -3 && *second->f_start == -3) { // ?�수 + ?�수
+   if(*first->f_start != -3 && *second->f_start == -3) { // ?戩垬 + ?岇垬
       second->f_start = second->f_start + 1;
       minus(first, second, 0, stack);
       return;
    }
-    if(*first->f_start == -3 && *second->f_start == -3) { // ?????�수?�때 처리
+    if(*first->f_start == -3 && *second->f_start == -3) { // ?????岇垬?茧晫 觳橂Μ
         first->f_start = first->f_start + 1;
         second->f_start = second->f_start + 1;
         minus_flag = 1;
@@ -542,7 +542,7 @@ void plus(Node *first, Node *second, DLL *stack) {
     result_f_end = result_f_temp;
     
    if(result_b != NULL) {
-        for(result_b_temp; result_b_temp < result_b + SIZE_BACK  ; result_b_temp++) *result_b_temp = 0; // ?�수?�도 ?�으�?초기?�s
+        for(result_b_temp; result_b_temp < result_b + SIZE_BACK  ; result_b_temp++) *result_b_temp = 0; // ?岇垬?愲弰 ?堨溂氅?齑堦赴?攕
       result_b_end = result_b_temp;
       result_b_temp--;
     }
@@ -559,7 +559,7 @@ void plus(Node *first, Node *second, DLL *stack) {
         s_temp--;
     }
     
-   if(f_temp == first->f_start && s_temp != second->f_start) { // ?�수� �?계산
+   if(f_temp == first->f_start && s_temp != second->f_start) { // ?曥垬攵 攵?瓿勳偘
         *result_f_temp += *f_temp + *s_temp;
         if(*result_f_temp >= 10) {
             *result_f_temp = *result_f_temp - 10;
@@ -607,7 +607,7 @@ void plus(Node *first, Node *second, DLL *stack) {
       f_temp = first->b_end;
       s_temp = second->b_end;
    
-      if(f_temp == NULL || s_temp == NULL) { // �ϳ��� ���� �ϳ��� �Ҽ� 
+      if(f_temp == NULL || s_temp == NULL) { // 窍唱绰 沥荐 窍唱绰 家荐 
          while(result_b_temp != result_b) {
             *result_b_temp = (f_temp == NULL ? *s_temp : *f_temp);
             result_b_temp--;
@@ -619,7 +619,7 @@ void plus(Node *first, Node *second, DLL *stack) {
       }
       
       
-      while(f_temp - first->b_start != s_temp - second->b_start) { //�ڸ��� �����ֱ� 
+      while(f_temp - first->b_start != s_temp - second->b_start) { //磊复荐 嘎苗林扁 
          if(first->b_end - first->b_start > second->b_end - second->b_start) {
             *result_b_temp += *f_temp;
          } else if(first->b_end - first->b_start < second->b_end - second->b_start) {
@@ -640,7 +640,7 @@ void plus(Node *first, Node *second, DLL *stack) {
            s_temp--;
        }
     
-      if(f_temp == first->b_start && s_temp != second->b_start) { // ?�수� �?계산
+      if(f_temp == first->b_start && s_temp != second->b_start) { // ?曥垬攵 攵?瓿勳偘
            *result_b_temp += *f_temp + *s_temp;
            if(*result_b_temp >= 10) {
                *result_b_temp = *result_b_temp - 10;
@@ -728,42 +728,42 @@ int main(void)
    }
    i_end = temp-1;
    f_start = &ch[0];
-   if(*f_start == -8) { // �?처음????괄호?�때
+   if(*f_start == -8) { // 毵?觳橃潓????甏勴樃?茧晫
       append(list, newnode(1, *f_start, 0, f_start, NULL, NULL, NULL));
       f_start = &ch[1];
    }
    for(char *k = i_start + 1; k < i_end; k++) {
-      if(*k == -2) { //?�수?�을 만났?�때
+      if(*k == -2) { //?岇垬?愳潉 毵岆偓?勲晫
          b_flag = 1;
          f_end = k - 1;
          b_start = k + 1;
       }
-      if(k + 1 == i_end && b_flag == 0) { // ?�에 ?�달?�고, ?�수??경우
+      if(k + 1 == i_end && b_flag == 0) { // ?濎棎 ?勲嫭?橁碃, ?曥垬??瓴届毎
          if(*k == -7) { // ')'
              f_end = k - 1;
-             append(list, newnode(0, 0, 0, f_start, f_end, NULL, NULL)); //?�자 
-             append(list, newnode(1, *k, 3, k, NULL, NULL, NULL)); //?�른 괄호 
+             append(list, newnode(0, 0, 0, f_start, f_end, NULL, NULL)); //?瀽 
+             append(list, newnode(1, *k, 3, k, NULL, NULL, NULL)); //?るジ 甏勴樃 
              break;
          } else {
             f_end = k;
-            append(list, newnode(0, 0, 0, f_start, f_end, NULL, NULL)); //?�자 
+            append(list, newnode(0, 0, 0, f_start, f_end, NULL, NULL)); //?瀽 
             break;
          }
       }
-      if(k + 1 == i_end && b_flag == 1) { // ?�에 ?�달?�고, ?�수??경우
+      if(k + 1 == i_end && b_flag == 1) { // ?濎棎 ?勲嫭?橁碃, ?岇垬??瓴届毎
          if(*k == -7) {
              b_end = k - 1;
-             append(list, newnode(0, 0, 0, f_start, f_end, b_start, b_end)); //?�자 
-             append(list, newnode(1, *k, 3, k, NULL, NULL, NULL)); //?�른 괄호
+             append(list, newnode(0, 0, 0, f_start, f_end, b_start, b_end)); //?瀽 
+             append(list, newnode(1, *k, 3, k, NULL, NULL, NULL)); //?るジ 甏勴樃
              break;
          } else {
             b_end = k;
-            append(list, newnode(0, 0, 0, f_start, f_end, b_start, b_end)); // ?�자
+            append(list, newnode(0, 0, 0, f_start, f_end, b_start, b_end)); // ?瀽
             break;
          }
       }
-      if(b_flag == 0) { // ?�수??경우
-         if(*k == -5 || *k == -3 || *k == -6 || *k == -1) { // ?�산?��? 만난 경우
+      if(b_flag == 0) { // ?曥垬??瓴届毎
+         if(*k == -5 || *k == -3 || *k == -6 || *k == -1) { // ?办偘?愲? 毵岆倻 瓴届毎
             f_end = k - 1;
             if(*(k - 1) == -7 && *(k + 1) == -8) { // ')' '+' '('
                f_end = k - 2;
@@ -810,7 +810,7 @@ int main(void)
             }
          }
       } else {
-         if(*k == -5 || *k == -3 || *k == -6 || *k == -1) { //?�산?��? 만난 경우
+         if(*k == -5 || *k == -3 || *k == -6 || *k == -1) { //?办偘?愲? 毵岆倻 瓴届毎
             b_end = k - 1;
             if(*(k - 1) == -7 && *(k + 1) == -8) { // ')' '+' '('
                b_end = k - 2;
